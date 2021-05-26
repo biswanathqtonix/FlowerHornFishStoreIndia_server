@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const upload = multer({});
 
 const UserController = require('../controllers/UserController');
+
+
+const upload = multer({});
 
 router.get('/',UserController.index);
 router.get('/:id',UserController.view);
