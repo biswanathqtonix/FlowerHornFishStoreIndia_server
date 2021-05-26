@@ -5,12 +5,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 // FOR IMAGEKIT AUTH
-const ImageKit = require('imagekit');
-var imagekit = new ImageKit({
-    publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
-    privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
-    urlEndpoint : "https://ik.imagekit.io/aquariumstore"
-});
+// const ImageKit = require('imagekit');
+// var imagekit = new ImageKit({
+//     publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
+//     privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
+//     urlEndpoint : "https://ik.imagekit.io/aquariumstore"
+// });
 // FOR IMAGEKIT AUTH
 
 //===ROUTE INCLUDE===
@@ -59,10 +59,10 @@ app.get('/api',(req,res)=>{
 });
 
 // FOR IMAGEKIT AUTH
-app.get('/imagekitauth', function (req, res) {
-  var result = imagekit.getAuthenticationParameters();
-  res.send(result);
-});
+// app.get('/imagekitauth', function (req, res) {
+//   var result = imagekit.getAuthenticationParameters();
+//   res.send(result);
+// });
 
 
 // app.get('/ip',(req,res)=>{
