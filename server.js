@@ -13,7 +13,6 @@ var imagekit = new ImageKit({
 });
 // FOR IMAGEKIT AUTH
 
-const User = require('./routes/user');
 const ProductCategory = require('./routes/productcategory');
 const ProductSubCategory = require('./routes/productsubcategory');
 const Product = require('./routes/product');
@@ -52,7 +51,6 @@ app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
 });
 
-app.use('/api/user',User);
 app.use('/api/productcategory',ProductCategory);
 app.use('/api/productsubcategory',ProductSubCategory);
 app.use('/api/product',Product);
