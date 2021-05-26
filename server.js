@@ -13,7 +13,7 @@ var imagekit = new ImageKit({
 });
 // FOR IMAGEKIT AUTH
 
-const User = require('./routes/user');
+const ProductCategory = require('./routes/productcategory');
 
 
 mongoose.connect('mongodb+srv://b21341995returns:gurubaba@123@aquastore.mkuty.mongodb.net/databaseaquastore?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true});
@@ -49,4 +49,4 @@ app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
 });
 
-app.use('/api/user',User);
+app.use('/api/productcategory',ProductCategory);
