@@ -1,8 +1,7 @@
 
 const {response}= require('express');
-// const bcrypt = require('bcrypt');
-const bcrypt = require('bcryptjs')
-const saltRounds = 10;
+// const bcrypt = require('bcryptjs')
+// const saltRounds = 10;
 
 const User= require('../models/User');
 const LoginDetails= require('../models/LoginDetails');
@@ -41,90 +40,90 @@ const logindetails = (req,res) => {
   })
 }
 
-//***LOGIN***
-const login = (req,res) => {
-
-  User.findOne({email:req.body.email},(err,doc)=>{
-    if(!err){
-         if(doc===null){
-           res.json({
-             response:false,
-             message:'wrong_email'
-           })
-         }else{
-
-           bcrypt.compare(req.body.password, doc.password, function(err, match) {
-            if (match){
-              LoginDetails.create(req.body)
-              res.json({
-                  response:true,
-                  message:'login_success',
-                  data:doc
-                })
-            } else {
-              res.json({
-                  response:false,
-                  message:'wrong_password'
-                })
-            }
-          });
-         }
-    }else{
-      res.json({
-        response:false,
-        message:'failed'
-      })
-    }
-  })
-}
-
-
-//***STORE***
-const store = (req,res) => {
-  User.findOne({email:req.body.email})
-  .then(response=>{
-    if(response){
-      res.json({
-        response:false,
-        message:'Email already exist.'
-      })
-    }else{
-
-      bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
-
-          var user = new User();
-          user.name = req.body.name;
-          user.email = req.body.email;
-          user.password = hash;
-          user.usertype = req.body.usertype;
-          user.registervia = req.body.registervia;
-          user.userstatus = req.body.userstatus;
-          user.email_verification = req.body.email_verification;
-          user.image = req.body.image;
-          user.image_name = req.body.image_name;
-          user.image_id = req.body.image_id;
-          user.image_path = req.body.image_path;
-          user.imagesmall = req.body.imagesmall;
-          user.imagemedium = req.body.imagemedium;
-          user.save((err,doc)=>{
-              if(!err){
-                res.json({
-                  response:true,
-                  message:'Successfully created',
-                  data:doc
-                })
-              }else{
-                res.json({
-                  response:false,
-                  message:'Failed to create'
-                })
-              }
-          })
-
-      });
-    }
-  })
-}
+// //***LOGIN***
+// const login = (req,res) => {
+//
+//   User.findOne({email:req.body.email},(err,doc)=>{
+//     if(!err){
+//          if(doc===null){
+//            res.json({
+//              response:false,
+//              message:'wrong_email'
+//            })
+//          }else{
+//
+//            bcrypt.compare(req.body.password, doc.password, function(err, match) {
+//             if (match){
+//               LoginDetails.create(req.body)
+//               res.json({
+//                   response:true,
+//                   message:'login_success',
+//                   data:doc
+//                 })
+//             } else {
+//               res.json({
+//                   response:false,
+//                   message:'wrong_password'
+//                 })
+//             }
+//           });
+//          }
+//     }else{
+//       res.json({
+//         response:false,
+//         message:'failed'
+//       })
+//     }
+//   })
+// }
+//
+//
+// //***STORE***
+// const store = (req,res) => {
+//   User.findOne({email:req.body.email})
+//   .then(response=>{
+//     if(response){
+//       res.json({
+//         response:false,
+//         message:'Email already exist.'
+//       })
+//     }else{
+//
+//       bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+//
+//           var user = new User();
+//           user.name = req.body.name;
+//           user.email = req.body.email;
+//           user.password = hash;
+//           user.usertype = req.body.usertype;
+//           user.registervia = req.body.registervia;
+//           user.userstatus = req.body.userstatus;
+//           user.email_verification = req.body.email_verification;
+//           user.image = req.body.image;
+//           user.image_name = req.body.image_name;
+//           user.image_id = req.body.image_id;
+//           user.image_path = req.body.image_path;
+//           user.imagesmall = req.body.imagesmall;
+//           user.imagemedium = req.body.imagemedium;
+//           user.save((err,doc)=>{
+//               if(!err){
+//                 res.json({
+//                   response:true,
+//                   message:'Successfully created',
+//                   data:doc
+//                 })
+//               }else{
+//                 res.json({
+//                   response:false,
+//                   message:'Failed to create'
+//                 })
+//               }
+//           })
+//
+//       });
+//     }
+//   })
+// }
 
 
 //***VIEW***
@@ -204,4 +203,5 @@ const deleteimage = (req,res) => {
 }
 
 
-module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
+// module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
+module.exports={index,view,deleteimage,deleteuser,update,logindetails};
