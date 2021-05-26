@@ -40,42 +40,45 @@ const logindetails = (req,res) => {
   })
 }
 
-// //***LOGIN***
-// const login = (req,res) => {
-//
-//   User.findOne({email:req.body.email},(err,doc)=>{
-//     if(!err){
-//          if(doc===null){
-//            res.json({
-//              response:false,
-//              message:'wrong_email'
-//            })
-//          }else{
-//
-//            bcrypt.compare(req.body.password, doc.password, function(err, match) {
-//             if (match){
-//               LoginDetails.create(req.body)
-//               res.json({
-//                   response:true,
-//                   message:'login_success',
-//                   data:doc
-//                 })
-//             } else {
-//               res.json({
-//                   response:false,
-//                   message:'wrong_password'
-//                 })
-//             }
-//           });
-//          }
-//     }else{
-//       res.json({
-//         response:false,
-//         message:'failed'
-//       })
-//     }
-//   })
-// }
+//***LOGIN***
+const login = (req,res) => {
+
+  User.findOne({email:req.body.email},(err,doc)=>{
+    if(!err){
+         if(doc===null){
+           res.json({
+             response:false,
+             message:'wrong_email'
+           })
+         }else{
+
+           // bcrypt.compare(req.body.password, doc.password, function(err, match) {
+
+           var match = bcrypt.compareSync(req.body.password, doc.password);
+
+            if (match){
+              LoginDetails.create(req.body)
+              res.json({
+                  response:true,
+                  message:'login_success',
+                  data:doc
+                })
+            } else {
+              res.json({
+                  response:false,
+                  message:'wrong_password'
+                })
+            }
+          // });
+         }
+    }else{
+      res.json({
+        response:false,
+        message:'failed'
+      })
+    }
+  })
+}
 
 
 //***STORE***
@@ -207,5 +210,5 @@ const deleteimage = (req,res) => {
 }
 
 
-module.exports={index,store,view,deleteimage,deleteuser,update,logindetails};
-// module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
+// module.exports={index,store,view,deleteimage,deleteuser,update,logindetails};
+module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
