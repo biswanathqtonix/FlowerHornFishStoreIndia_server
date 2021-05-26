@@ -4,14 +4,6 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
 
-//===ROUTE INCLUDE===
-const User = require('./routes/user');
-const ProductCategory = require('./routes/productcategory');
-const ProductSubCategory = require('./routes/productsubcategory');
-const ProductImage = require('./routes/productimage');
-const Product = require('./routes/product');
-//===ROUTE INCLUDE===
-
 mongoose.connect('mongodb+srv://b21341995returns:gurubaba@123@aquastore.mkuty.mongodb.net/databaseaquastore?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true});
 const db = mongoose.connection;
 
@@ -39,11 +31,3 @@ const PORT = process.env.port || 5000;
 app.listen(PORT, ()=>{
     console.log(`Server is running on port ${PORT}`);
 });
-
-//API ROUTES
-app.use('/api/user',User);
-app.use('/api/productcategory',ProductCategory);
-app.use('/api/productsubcategory',ProductSubCategory);
-app.use('/api/productimage',ProductImage);
-app.use('/api/product',Product);
-//API ROUTES
