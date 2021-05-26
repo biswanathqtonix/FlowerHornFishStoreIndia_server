@@ -5,11 +5,11 @@ const multer = require('multer');
 const UserController = require('../controllers/UserController');
 
 
-const upload = multer({});
+// const upload = multer({});
 
 router.get('/',UserController.index);
 router.get('/:id',UserController.view);
-router.post('/',upload.single('image'),UserController.store);
+// router.post('/',upload.single('image'),UserController.store);
 
 router.put('/:id',UserController.update);
 
