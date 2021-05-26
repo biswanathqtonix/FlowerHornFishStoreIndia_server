@@ -9,7 +9,7 @@ const UserController = require('../controllers/UserController');
 
 router.get('/',UserController.index);
 router.get('/:id',UserController.view);
-// router.post('/',upload.single('image'),UserController.store);
+router.post('/',upload.single('image'),UserController.store);
 
 router.put('/:id',UserController.update);
 

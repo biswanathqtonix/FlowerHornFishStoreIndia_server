@@ -1,6 +1,7 @@
 
 const {response}= require('express');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs')
 const saltRounds = 10;
 
 const User= require('../models/User');
