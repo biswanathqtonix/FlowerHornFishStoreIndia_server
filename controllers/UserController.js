@@ -1,7 +1,7 @@
 
 const {response}= require('express');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+var bcrypt = require('bcryptjs');
+var salt = bcrypt.genSaltSync(10);
 
 const User= require('../models/User');
 const LoginDetails= require('../models/LoginDetails');
@@ -40,42 +40,42 @@ const logindetails = (req,res) => {
   })
 }
 
-//***LOGIN***
-const login = (req,res) => {
-
-  User.findOne({email:req.body.email},(err,doc)=>{
-    if(!err){
-         if(doc===null){
-           res.json({
-             response:false,
-             message:'wrong_email'
-           })
-         }else{
-
-           bcrypt.compare(req.body.password, doc.password, function(err, match) {
-            if (match){
-              LoginDetails.create(req.body)
-              res.json({
-                  response:true,
-                  message:'login_success',
-                  data:doc
-                })
-            } else {
-              res.json({
-                  response:false,
-                  message:'wrong_password'
-                })
-            }
-          });
-         }
-    }else{
-      res.json({
-        response:false,
-        message:'failed'
-      })
-    }
-  })
-}
+// //***LOGIN***
+// const login = (req,res) => {
+//
+//   User.findOne({email:req.body.email},(err,doc)=>{
+//     if(!err){
+//          if(doc===null){
+//            res.json({
+//              response:false,
+//              message:'wrong_email'
+//            })
+//          }else{
+//
+//            bcrypt.compare(req.body.password, doc.password, function(err, match) {
+//             if (match){
+//               LoginDetails.create(req.body)
+//               res.json({
+//                   response:true,
+//                   message:'login_success',
+//                   data:doc
+//                 })
+//             } else {
+//               res.json({
+//                   response:false,
+//                   message:'wrong_password'
+//                 })
+//             }
+//           });
+//          }
+//     }else{
+//       res.json({
+//         response:false,
+//         message:'failed'
+//       })
+//     }
+//   })
+// }
 
 
 //***STORE***
@@ -89,7 +89,11 @@ const store = (req,res) => {
       })
     }else{
 
-      bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+      // bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
+
+
+        var hash = bcrypt.hashSync(req.body.password, salt);
+
 
           var user = new User();
           user.name = req.body.name;
@@ -120,7 +124,7 @@ const store = (req,res) => {
               }
           })
 
-      });
+      // });
     }
   })
 }
@@ -203,4 +207,5 @@ const deleteimage = (req,res) => {
 }
 
 
-module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
+module.exports={index,store,view,deleteimage,deleteuser,update,logindetails};
+// module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
