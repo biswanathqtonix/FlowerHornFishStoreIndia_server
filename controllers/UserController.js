@@ -16,7 +16,7 @@ var imagekit = new ImageKit({
 
 //***INDEX***
 const index = (req,res) => {
-  User.find().sort({createdAt:-1})
+  User.find().sort({_id:-1})
   .then(response=>{
     res.json({
       response:true,
@@ -31,7 +31,7 @@ const index = (req,res) => {
 
 //***LOGIN DETAILS***
 const logindetails = (req,res) => {
-  LoginDetails.find().sort({createdAtL:-1})
+  LoginDetails.find().sort({_id:-1})
   .then(response=>{
     res.json({
       response:true,
@@ -39,6 +39,63 @@ const logindetails = (req,res) => {
     })
   })
 }
+
+
+//***SOCIAL LOGIN DETAILS***
+const sociallogin = (req,res) => {
+  // LoginDetails.find().sort({_id:-1})
+  // .then(response=>{
+  //   res.json({
+  //     response:true,
+  //     data:response
+  //   })
+  // })
+  // console.log(req.body);
+  User.findOne({email:req.body.ku})
+  .then(response=>{
+    if(response){
+      res.json({
+        response:false,
+        data:response,
+        message:'Email already exist.'
+      })
+    }else{
+
+          var user = new User();
+          user.name = req.body.Ve;
+          user.email = req.body.ku;
+          user.usertype = 'User';
+          user.registervia = 'SocialMedia';
+          user.userstatus = 'Active';
+          user.email_verification = 'Verified';
+          user.image = req.body.ZJ;
+          user.image_name = req.body.ZJ;
+          user.image_id = req.body.ZJ;
+          user.image_path = req.body.ZJ;
+          user.imagesmall = req.body.ZJ;
+          user.imagemedium = req.body.ZJ;
+          user.save((err,doc)=>{
+              if(!err){
+                res.json({
+                  response:true,
+                  message:'Successfully created',
+                  data:doc
+                })
+              }else{
+                res.json({
+                  response:false,
+                  message:'Failed to create'
+                })
+              }
+          })
+
+      // });
+    }
+  })
+
+
+}
+
 
 //***LOGIN***
 const login = (req,res) => {
@@ -174,18 +231,7 @@ const deleteuser = async (req,res) => {
     if(user){
       imagekit.deleteFile(`${user.image_id}`).then(response => {
           console.log(response);
-          User.findByIdAndRemove(req.params.id,(err,doc)=>{
-            if(!err){
-              res.json({
-                response:true,
-              })
-            }else{
-              res.json({
-                response:false,
-                message:'Failed delete user'
-              })
-            }
-          })
+
       }).catch(error => {
           console.log(error);
       });
@@ -197,6 +243,19 @@ const deleteuser = async (req,res) => {
         data:req.params.id
       })
     }
+
+    User.findByIdAndRemove(req.params.id,(err,doc)=>{
+      if(!err){
+        res.json({
+          response:true,
+        })
+      }else{
+        res.json({
+          response:false,
+          message:'Failed delete user'
+        })
+      }
+    })
 }
 
 
@@ -211,4 +270,4 @@ const deleteimage = (req,res) => {
 
 
 // module.exports={index,store,view,deleteimage,deleteuser,update,logindetails};
-module.exports={index,store,view,deleteimage,deleteuser,login,update,logindetails};
+module.exports={index,store,view,deleteimage,deleteuser,sociallogin,login,update,logindetails};

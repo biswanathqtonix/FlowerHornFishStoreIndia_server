@@ -72,7 +72,7 @@ const emailfind = (req,res) => {
 
 //***INDEX***
 const index = (req,res) => {
-  Product.find().sort({createdAt:-1})
+  Product.find().sort({_id:-1})
   .then(data=>{
     res.json({
       response:true,

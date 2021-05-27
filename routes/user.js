@@ -15,6 +15,9 @@ router.put('/:id',UserController.update);
 router.patch('/:id',UserController.deleteuser);
 
 router.post('/login',UserController.login);
+router.post('/sociallogin',UserController.sociallogin);
+
+
 router.get('/login/details',UserController.logindetails);
 
 
