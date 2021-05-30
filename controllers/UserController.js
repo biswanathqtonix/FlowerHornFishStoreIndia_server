@@ -4,7 +4,7 @@ var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
 
 const User= require('../models/User');
-const LoginDetails= require('../models/LoginDetails');
+// const LoginDetails= require('../models/LoginDetails');
 
 const ImageKit = require('imagekit');
 var imagekit = new ImageKit({
