@@ -4,33 +4,44 @@ var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
 
 const User= require('../models/User');
-// const LoginDetails= require('../models/LoginDetails');
+const LoginDetails= require('../models/LoginDetails');
 
-// const ImageKit = require('imagekit');
-// var imagekit = new ImageKit({
-//     publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
-//     privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
-//     urlEndpoint : "https://ik.imagekit.io/aquariumstore"
-// });
+const ImageKit = require('imagekit');
+var imagekit = new ImageKit({
+    publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
+    privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
+    urlEndpoint : "https://ik.imagekit.io/aquariumstore"
+});
 
-// const nodemailer = require('nodemailer');
-// const Email = require('email-templates');
-//
-// const transporter = nodemailer.createTransport({
-//   service: process.env.EMAIL_SERVICE,
-//   host: process.env.EMAIL_HOST,
-//   secureConnection: true,
-//   port: 465,
-//   auth: {
-//   user: process.env.EMAIL_USER,
-//   pass: process.env.EMAIL_PASS
-//   }
-//   });
-//   const email = new Email({
-//   transport: transporter,
-//   send: true,
-//   preview: false,
-// });
+const nodemailer = require('nodemailer');
+const Email = require('email-templates');
+
+const transporter = nodemailer.createTransport({
+  service: process.env.EMAIL_SERVICE,
+  host: process.env.EMAIL_HOST,
+  secureConnection: true,
+  port: 465,
+  auth: {
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS
+  }
+
+    //
+    // service: 'Godaddy',
+    // host: "smtpout.secureserver.net",
+    // secureConnection: true,
+    // port: 465,
+    //
+    // auth: {
+    //     user: "info@flowerhornfishstoreindia.com",
+    //     pass: "Apple@123"
+    // }
+  });
+  const email = new Email({
+  transport: transporter,
+  send: true,
+  preview: false,
+});
 
 
 
@@ -47,9 +58,11 @@ const index = (req,res) => {
   })
 }
 
+module.exports={index};
 
 
-//***LOGIN DETAILS***
+
+// //***LOGIN DETAILS***
 // const logindetails = (req,res) => {
 //   LoginDetails.find().sort({_id:-1})
 //   .then(response=>{
@@ -59,9 +72,8 @@ const index = (req,res) => {
 //     })
 //   })
 // }
-
-module.exports={index};
-
+//
+//
 // //***SOCIAL LOGIN Facebook (WEB)***
 // const socialloginfacebook = (req,res) => {
 //   User.findOne({email:req.body.ku})
