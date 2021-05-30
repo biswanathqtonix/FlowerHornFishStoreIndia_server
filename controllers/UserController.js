@@ -1,4 +1,4 @@
-require('dotenv-safe').config();
+// require('dotenv-safe').config();
 const {response}= require('express');
 // var bcrypt = require('bcryptjs');
 // var salt = bcrypt.genSaltSync(10);
