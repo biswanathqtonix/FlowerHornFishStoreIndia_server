@@ -1,6 +1,6 @@
 const mongoose= require('mongoose');
 const Schema = mongoose.Schema;
-// const { uuid } = require('uuidv4');
+const { uuid } = require('uuidv4');
 
 const userSchema=new Schema({
   usertype:{

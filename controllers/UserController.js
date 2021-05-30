@@ -428,32 +428,32 @@ const deleteuser = async (req,res) => {
 
 
 //***SEND EMAIL VERIFICATION CODE (WEB)***//
-const sendemailverificationcode = async (req,res) => {
-
-  const user = await User.findById(req.body.id);
-
-  //password is his email verification code
-
-  // email.send({
-  //       template: 'emailverification',
-  //       message: {
-  //         from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
-  //         to:user.email,
-  //       },
-  //       locals: {
-  //         name:user.name,
-  //         verifycode:user.email_verification_code,
-  //         // fname: 'John',
-  //         // lname: 'Snow',
-  //       }
-  //   }).then(() => console.log('email has been sent!'));
-
-
-  res.json({
-    response:true,
-    email:req.body.id
-  })
-}
+// const sendemailverificationcode = async (req,res) => {
+//
+//   const user = await User.findById(req.body.id);
+//
+//   //password is his email verification code
+//
+//   email.send({
+//         template: 'emailverification',
+//         message: {
+//           from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
+//           to:user.email,
+//         },
+//         locals: {
+//           name:user.name,
+//           verifycode:user.email_verification_code,
+//           // fname: 'John',
+//           // lname: 'Snow',
+//         }
+//     }).then(() => console.log('email has been sent!'));
+//
+//
+//   res.json({
+//     response:true,
+//     email:req.body.id
+//   })
+// }
 
 //***CHECK EMAIL VERIFICATION CODE (WEB)***//
 const checkemailverificationcode = async (req,res) => {
@@ -509,5 +509,5 @@ const deleteimage = (req,res) => {
 }
 
 
-// module.exports={index,store,view,deleteimage,deleteuser,update,logindetails};
-module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,checkemailverificationcode,login,update,logindetails,sendemailverificationcode};
+// module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,checkemailverificationcode,login,update,logindetails,sendemailverificationcode};
+module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,checkemailverificationcode,login,update,logindetails};

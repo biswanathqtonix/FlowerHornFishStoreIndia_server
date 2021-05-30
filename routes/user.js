@@ -23,7 +23,7 @@ router.post('/socialloginfacebook',UserController.socialloginfacebook);
 //web user register
 router.post('/userregister',UserController.userregister);
 //web email verification
-router.post('/send-email-verification-code',UserController.sendemailverificationcode);
+// router.post('/send-email-verification-code',UserController.sendemailverificationcode);
 //web email check verification
 router.post('/check-email-verification-code',UserController.checkemailverificationcode);
 
