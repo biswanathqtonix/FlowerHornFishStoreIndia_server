@@ -430,71 +430,71 @@ const deleteuser = async (req,res) => {
 //***SEND EMAIL VERIFICATION CODE (WEB)***//
 const sendemailverificationcode = async (req,res) => {
 
-  // const user = await User.findById(req.body.id);
-  //
-  // //password is his email verification code
-  //
-  // email.send({
-  //       template: 'emailverification',
-  //       message: {
-  //         from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
-  //         to:user.email,
-  //       },
-  //       locals: {
-  //         name:user.name,
-  //         verifycode:user.email_verification_code,
-  //         // fname: 'John',
-  //         // lname: 'Snow',
-  //       }
-  //   }).then(() => console.log('email has been sent!'));
+  const user = await User.findById(req.body.id);
+
+  //password is his email verification code
+
+  email.send({
+        template: 'emailverification',
+        message: {
+          from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
+          to:user.email,
+        },
+        locals: {
+          name:user.name,
+          verifycode:user.email_verification_code,
+          // fname: 'John',
+          // lname: 'Snow',
+        }
+    }).then(() => console.log('email has been sent!'));
 
 
   res.json({
     response:true,
-    // email:req.body.id
+    email:req.body.id
   })
 }
 
 //***CHECK EMAIL VERIFICATION CODE (WEB)***//
 const checkemailverificationcode = async (req,res) => {
 
-  const user = await User.findById(req.body.id);
+  console.log(123);
 
-  if(user.email_verification_code === req.body.code){
-
-    const udata = {email_verification:'Verified'};
-    User.update({_id:req.body.id},udata,(err,doc)=>{
-      if(!err){
-
-        User.findById(req.body.id,(err,doc)=>{
-          if(!err){
-            res.json({
-              response:true,
-              data:doc
-            })
-          }else{
-            res.json({
-              response:false,
-            })
-          }
-        })
-
-
-      }else{
-        res.json({
-          response:false,
-        })
-      }
-    })
-
-  }else{
-    res.json({
-      response:false,
-      code:req.body
-    })
-  }
-
-
+  // const user = await User.findById(req.body.id);
+  //
+  // if(user.email_verification_code === req.body.code){
+  //
+  //   const udata = {email_verification:'Verified'};
+  //   User.update({_id:req.body.id},udata,(err,doc)=>{
+  //     if(!err){
+  //
+  //       User.findById(req.body.id,(err,doc)=>{
+  //         if(!err){
+  //           res.json({
+  //             response:true,
+  //             data:doc
+  //           })
+  //         }else{
+  //           res.json({
+  //             response:false,
+  //           })
+  //         }
+  //       })
+  //
+  //
+  //     }else{
+  //       res.json({
+  //         response:false,
+  //       })
+  //     }
+  //   })
+  //
+  // }else{
+  //   res.json({
+  //     response:false,
+  //     code:req.body
+  //   })
+  // }
 
 }
 
