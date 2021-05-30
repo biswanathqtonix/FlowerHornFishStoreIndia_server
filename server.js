@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -8,9 +7,9 @@ const cors = require('cors');
 // FOR IMAGEKIT AUTH
 const ImageKit = require('imagekit');
 var imagekit = new ImageKit({
-    publicKey : process.env.IMAGEKIT_PUBLICKEY,
-    privateKey : process.env.IMAGEKIT_PRIVATEKEY,
-    urlEndpoint : process.env.IMAGEKIT_URLENDPOINTKEY
+    publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
+    privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
+    urlEndpoint : "https://ik.imagekit.io/aquariumstore"
 });
 // FOR IMAGEKIT AUTH
 
@@ -21,7 +20,7 @@ const ProductSubCategory = require('./routes/productsubcategory');
 const Product = require('./routes/product');
 
 
-mongoose.connect(process.env.MONGODB, {useNewUrlParser: true, useUnifiedTopology:true});
+mongoose.connect('mongodb+srv://b21341995returns:gurubaba@123@aquastore.mkuty.mongodb.net/databaseaquastore?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true});
 const db = mongoose.connection;
 
 db.on('error',(err)=>{
