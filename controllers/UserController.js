@@ -59,20 +59,20 @@ const index = (req,res) => {
 }
 
 
-module.exports={index};
 
-// //***LOGIN DETAILS***
-// const logindetails = (req,res) => {
-//   LoginDetails.find().sort({_id:-1})
-//   .then(response=>{
-//     res.json({
-//       response:true,
-//       data:response
-//     })
-//   })
-// }
-//
-//
+//***LOGIN DETAILS***
+const logindetails = (req,res) => {
+  LoginDetails.find().sort({_id:-1})
+  .then(response=>{
+    res.json({
+      response:true,
+      data:response
+    })
+  })
+}
+
+module.exports={index,logindetails};
+
 // //***SOCIAL LOGIN Facebook (WEB)***
 // const socialloginfacebook = (req,res) => {
 //   User.findOne({email:req.body.ku})
