@@ -434,19 +434,19 @@ const sendemailverificationcode = async (req,res) => {
 
   //password is his email verification code
 
-  email.send({
-        template: 'emailverification',
-        message: {
-          from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
-          to:user.email,
-        },
-        locals: {
-          name:user.name,
-          verifycode:user.email_verification_code,
-          // fname: 'John',
-          // lname: 'Snow',
-        }
-    }).then(() => console.log('email has been sent!'));
+  // email.send({
+  //       template: 'emailverification',
+  //       message: {
+  //         from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
+  //         to:user.email,
+  //       },
+  //       locals: {
+  //         name:user.name,
+  //         verifycode:user.email_verification_code,
+  //         // fname: 'John',
+  //         // lname: 'Snow',
+  //       }
+  //   }).then(() => console.log('email has been sent!'));
 
 
   res.json({
