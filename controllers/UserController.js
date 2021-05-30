@@ -1,7 +1,7 @@
 require('dotenv-safe').config();
 const {response}= require('express');
-var bcrypt = require('bcryptjs');
-var salt = bcrypt.genSaltSync(10);
+// var bcrypt = require('bcryptjs');
+// var salt = bcrypt.genSaltSync(10);
 
 const User= require('../models/User');
 // const LoginDetails= require('../models/LoginDetails');
