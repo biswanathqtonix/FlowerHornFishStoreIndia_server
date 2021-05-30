@@ -3,9 +3,9 @@ const router = express.Router();
 const multer = require('multer');
 const upload = multer({});
 
-// const UserController = require('../controllers/UserController');
+const UserController = require('../controllers/UserController');
 
-// router.get('/',UserController.index);
+router.get('/',UserController.index);
 // router.get('/:id',UserController.view);
 // router.post('/',upload.single('image'),UserController.store);
 //
