@@ -458,43 +458,41 @@ const sendemailverificationcode = async (req,res) => {
 //***CHECK EMAIL VERIFICATION CODE (WEB)***//
 const checkemailverificationcode = async (req,res) => {
 
-  console.log(123);
+  const user = await User.findById(req.body.id);
 
-  // const user = await User.findById(req.body.id);
-  //
-  // if(user.email_verification_code === req.body.code){
-  //
-  //   const udata = {email_verification:'Verified'};
-  //   User.update({_id:req.body.id},udata,(err,doc)=>{
-  //     if(!err){
-  //
-  //       User.findById(req.body.id,(err,doc)=>{
-  //         if(!err){
-  //           res.json({
-  //             response:true,
-  //             data:doc
-  //           })
-  //         }else{
-  //           res.json({
-  //             response:false,
-  //           })
-  //         }
-  //       })
-  //
-  //
-  //     }else{
-  //       res.json({
-  //         response:false,
-  //       })
-  //     }
-  //   })
-  //
-  // }else{
-  //   res.json({
-  //     response:false,
-  //     code:req.body
-  //   })
-  // }
+  if(user.email_verification_code === req.body.code){
+
+    const udata = {email_verification:'Verified'};
+    User.update({_id:req.body.id},udata,(err,doc)=>{
+      if(!err){
+
+        User.findById(req.body.id,(err,doc)=>{
+          if(!err){
+            res.json({
+              response:true,
+              data:doc
+            })
+          }else{
+            res.json({
+              response:false,
+            })
+          }
+        })
+
+
+      }else{
+        res.json({
+          response:false,
+        })
+      }
+    })
+
+  }else{
+    res.json({
+      response:false,
+      code:req.body
+    })
+  }
 
 }
 
