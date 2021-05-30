@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "get-site-urls": "^1.1.7",
     "imagekit": "^3.1.2",
+    "jade": "^1.11.0",
     "js-crawler": "^0.3.21",
     "mongoose": "^5.12.7",
     "morgan": "^1.10.0",
@@ -28,6 +29,7 @@
     "node-email-extractor": "^1.0.3",
     "nodemailer": "^6.6.1",
     "nodemon": "^2.0.7",
+    "pug": "^3.0.2",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.8"
   }
