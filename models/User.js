@@ -18,10 +18,10 @@ const userSchema=new Schema({
   email_verification:{
     type:String
   },
-  // email_verification_code:{
-  //   type:String,
-  //   default:uuid()
-  // },
+  email_verification_code:{
+    type:String,
+    default:uuid()
+  },
   email:{
     type:String
   },
