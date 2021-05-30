@@ -13,35 +13,24 @@ var imagekit = new ImageKit({
     urlEndpoint : "https://ik.imagekit.io/aquariumstore"
 });
 
-const nodemailer = require('nodemailer');
-const Email = require('email-templates');
-
-const transporter = nodemailer.createTransport({
-  service: process.env.EMAIL_SERVICE,
-  host: process.env.EMAIL_HOST,
-  secureConnection: true,
-  port: 465,
-  auth: {
-  user: process.env.EMAIL_USER,
-  pass: process.env.EMAIL_PASS
-  }
-
-    //
-    // service: 'Godaddy',
-    // host: "smtpout.secureserver.net",
-    // secureConnection: true,
-    // port: 465,
-    //
-    // auth: {
-    //     user: "info@flowerhornfishstoreindia.com",
-    //     pass: "Apple@123"
-    // }
-  });
-  const email = new Email({
-  transport: transporter,
-  send: true,
-  preview: false,
-});
+// const nodemailer = require('nodemailer');
+// const Email = require('email-templates');
+//
+// const transporter = nodemailer.createTransport({
+//   service: process.env.EMAIL_SERVICE,
+//   host: process.env.EMAIL_HOST,
+//   secureConnection: true,
+//   port: 465,
+//   auth: {
+//   user: process.env.EMAIL_USER,
+//   pass: process.env.EMAIL_PASS
+//   }
+//   });
+//   const email = new Email({
+//   transport: transporter,
+//   send: true,
+//   preview: false,
+// });
 
 
 
