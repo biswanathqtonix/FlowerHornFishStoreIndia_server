@@ -1,5 +1,6 @@
 const mongoose= require('mongoose');
 const Schema = mongoose.Schema;
+const { uuid } = require('uuidv4');
 
 const userSchema=new Schema({
   usertype:{
@@ -16,6 +17,10 @@ const userSchema=new Schema({
   },
   email_verification:{
     type:String
+  },
+  email_verification_code:{
+    type:String,
+    default:uuid()
   },
   email:{
     type:String
