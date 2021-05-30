@@ -61,17 +61,17 @@ const index = (req,res) => {
 
 
 //***LOGIN DETAILS***
-const logindetails = (req,res) => {
-  LoginDetails.find().sort({_id:-1})
-  .then(response=>{
-    res.json({
-      response:true,
-      data:response
-    })
-  })
-}
+// const logindetails = (req,res) => {
+//   LoginDetails.find().sort({_id:-1})
+//   .then(response=>{
+//     res.json({
+//       response:true,
+//       data:response
+//     })
+//   })
+// }
 
-module.exports={index,logindetails};
+module.exports={index};
 
 // //***SOCIAL LOGIN Facebook (WEB)***
 // const socialloginfacebook = (req,res) => {
