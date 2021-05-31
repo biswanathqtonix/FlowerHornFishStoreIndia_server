@@ -88,27 +88,12 @@ const nodemailer = require('nodemailer');
 const Email = require('email-templates');
 
 const transporter = nodemailer.createTransport({
-  // service: 'Godaddy',
-  // host: 'smtpout.secureserver.net',
-  // secureConnection: true,
-  // port: 465,
   service: 'gmail',
   host: 'smtp.gmail.com',
   auth: {
-  user: 'biswanath.qtonix@gmail.com',
-  pass: 'biswa_qtoniX'
+    user: 'flowerhornfishstoreindia@gmail.com',
+    pass: 'Apple@123'
   }
-
-    //
-    // service: 'Godaddy',
-    // host: "smtpout.secureserver.net",
-    // secureConnection: true,
-    // port: 465,
-    //
-    // auth: {
-    //     user: "info@flowerhornfishstoreindia.com",
-    //     pass: "Apple@123"
-    // }
   });
   const email = new Email({
   transport: transporter,
@@ -120,7 +105,7 @@ app.get('/email', (req,res)=>{
   email.send({
         template: 'emailverification',
         message: {
-          from:'biswanath.qtonix@gmail.com',
+          from:'flowerhornfishstoreindia@gmail.com',
           to:'b21341995returns@gmail.com',
         },
         locals: {
