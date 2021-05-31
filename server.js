@@ -84,6 +84,56 @@ app.get('/imagekitauth', function (req, res) {
   res.send(result);
 });
 
+const nodemailer = require('nodemailer');
+const Email = require('email-templates');
+
+const transporter = nodemailer.createTransport({
+  service: process.env.EMAIL_SERVICE,
+  host: process.env.EMAIL_HOST,
+  secureConnection: true,
+  port: 465,
+  auth: {
+  user: process.env.EMAIL_USER,
+  pass: process.env.EMAIL_PASS
+  }
+
+    //
+    // service: 'Godaddy',
+    // host: "smtpout.secureserver.net",
+    // secureConnection: true,
+    // port: 465,
+    //
+    // auth: {
+    //     user: "info@flowerhornfishstoreindia.com",
+    //     pass: "Apple@123"
+    // }
+  });
+  const email = new Email({
+  transport: transporter,
+  send: true,
+  preview: false,
+});
+
+app.get('/email', (req,res)=>{
+  email.send({
+        template: 'emailverification',
+        message: {
+          from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
+          to:'b21341995returns@gmail.com',
+        },
+        locals: {
+          name:'Biswanath',
+          verifycode:'1234',
+          // fname: 'John',
+          // lname: 'Snow',
+        }
+    }).then(response=>{
+      res.json({
+        response:true
+      })
+    });
+})
+
 
 
 const PORT = process.env.port || 5000;
