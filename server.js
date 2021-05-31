@@ -1,4 +1,3 @@
-require('dotenv-safe').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
@@ -8,9 +7,9 @@ const cors = require('cors');
 // FOR IMAGEKIT AUTH
 const ImageKit = require('imagekit');
 var imagekit = new ImageKit({
-    publicKey : process.env.IMAGEKIT_PUBLICKEY,
-    privateKey : process.env.IMAGEKIT_PRIVATEKEY,
-    urlEndpoint : process.env.IMAGEKIT_URLENDPOINTKEY
+    publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
+    privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
+    urlEndpoint : "https://ik.imagekit.io/aquariumstore"
 });
 // FOR IMAGEKIT AUTH
 
