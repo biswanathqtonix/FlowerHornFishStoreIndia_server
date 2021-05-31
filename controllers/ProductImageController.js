@@ -5,12 +5,20 @@ const {response}= require('express');
 const ProductImage= require('../models/ProductImage');
 
 
+// const ImageKit = require('imagekit');
+// var imagekit = new ImageKit({
+//   publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
+//   privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
+//   urlEndpoint : "https://ik.imagekit.io/aquariumstore"
+// });
+
 const ImageKit = require('imagekit');
 var imagekit = new ImageKit({
-  publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
-  privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
-  urlEndpoint : "https://ik.imagekit.io/aquariumstore"
+    publicKey : process.env.IMAGEKIT_PUBLICKEY,
+    privateKey : process.env.IMAGEKIT_PRIVATEKEY,
+    urlEndpoint : process.env.IMAGEKIT_URLENDPOINTKEY
 });
+
 
 //***INDEX***
 const index = (req,res) => {

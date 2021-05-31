@@ -6,12 +6,20 @@ var salt = bcrypt.genSaltSync(10);
 const User= require('../models/User');
 const LoginDetails= require('../models/LoginDetails');
 
+// const ImageKit = require('imagekit');
+// var imagekit = new ImageKit({
+//     publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
+//     privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
+//     urlEndpoint : "https://ik.imagekit.io/aquariumstore"
+// });
+
 const ImageKit = require('imagekit');
 var imagekit = new ImageKit({
-    publicKey : "public_PT35bTumSZqcSo2PDGddDRBW5V8=",
-    privateKey : "private_0gua1/UMbXWRKqFvuKjVntd+Xw4=",
-    urlEndpoint : "https://ik.imagekit.io/aquariumstore"
+    publicKey : process.env.IMAGEKIT_PUBLICKEY,
+    privateKey : process.env.IMAGEKIT_PRIVATEKEY,
+    urlEndpoint : process.env.IMAGEKIT_URLENDPOINTKEY
 });
+
 
 const nodemailer = require('nodemailer');
 const Email = require('email-templates');

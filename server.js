@@ -21,7 +21,7 @@ const ProductSubCategory = require('./routes/productsubcategory');
 const Product = require('./routes/product');
 
 
-mongoose.connect('mongodb+srv://b21341995returns:gurubaba@123@aquastore.mkuty.mongodb.net/databaseaquastore?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology:true});
+mongoose.connect(process.env.MONGODB, {useNewUrlParser: true, useUnifiedTopology:true});
 const db = mongoose.connection;
 
 db.on('error',(err)=>{
