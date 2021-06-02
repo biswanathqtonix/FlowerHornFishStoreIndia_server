@@ -461,15 +461,12 @@ const sendemailverificationcode = async (req,res) => {
     email:user.email,
     email_verification_code:user.email_verification_code
   }
-  // axios.post(process.env.APP_BACKENDURL2+'/email',data)
-  // .then(response=>{
-  //   console.log(response)
-  // })
-
 
   axios.post(process.env.APP_BACKENDURL2+'/api/email/sendemailverificationcode',data)
   .then(responsedata=>{
-    console.log(responsedata)
+    res.json(response=>{
+      data:response
+    })
   })
 
 
