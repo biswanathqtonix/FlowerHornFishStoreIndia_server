@@ -449,14 +449,11 @@ const sendemailverificationcode = async (req,res) => {
 
   axios.post(process.env.APP_BACKENDURL2+'/api/email/sendemailverificationcode',data)
   .then(responsedata=>{
-    // res.json(response=>{
-    //   data:response
-    // })
-    // console.log(response);
+    res.json({
+      response:true,
+    })
   })
-  res.json({
-    response:true,
-  })
+
 
 
 
@@ -466,46 +463,51 @@ const sendemailverificationcode = async (req,res) => {
 //***CHECK EMAIL VERIFICATION CODE (WEB)***//
 const checkemailverificationcode = async (req,res) => {
 
-  // const user = await User.findById(req.body.id);
-  //
-  // if(user.email_verification_code === req.body.code){
-  //
-  //   const udata = {email_verification:'Verified'};
-  //   User.update({_id:req.body.id},udata,(err,doc)=>{
-  //     if(!err){
-  //
-  //       User.findById(req.body.id,(err,doc)=>{
-  //         if(!err){
-  //           res.json({
-  //             response:true,
-  //             data:doc
-  //           })
-  //         }else{
-  //           res.json({
-  //             response:false,
-  //           })
-  //         }
-  //       })
-  //
-  //
-  //     }else{
-  //       res.json({
-  //         response:false,
-  //       })
-  //     }
-  //   })
-  //
-  // }else{
-  //   res.json({
-  //     response:false,
-  //     code:req.body
-  //   })
-  // }
+  const user = await User.findById(req.body.id);
+
+  if(user.email_verification_code === req.body.code){
+
+    const udata = {email_verification:'Verified'};
+    User.update({_id:req.body.id},udata,(err,doc)=>{
+      if(!err){
+
+        User.findById(req.body.id,(err,doc)=>{
+          if(!err){
+            res.json({
+              response:true,
+              data:doc
+            })
+          }else{
+            res.json({
+              response:false,
+              message:'user id not found'
+            })
+          }
+        })
 
 
-  res.json({
-    response:false
-  })
+      }else{
+        res.json({
+          response:false,
+          message:'failed to update'
+
+        })
+      }
+    })
+
+  }else{
+    res.json({
+      response:false,
+      code:req.body,
+      message:'wrong code'
+
+    })
+  }
+
+
+  // res.json({
+  //   response:false
+  // })
 
 }
 
