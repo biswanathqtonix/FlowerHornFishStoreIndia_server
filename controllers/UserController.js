@@ -456,16 +456,29 @@ const sendemailverificationcode = async (req,res) => {
   //   }).then(() => console.log('email has been sent!'));
 
 
-  axios.get(process.env.APP_BACKENDURL2+'/email')
-  .then(response=>{
-    console.log(response)
+  var data={
+    name:user.name,
+    email:user.email,
+    email_verification_code:user.email_verification_code
+  }
+  // axios.post(process.env.APP_BACKENDURL2+'/email',data)
+  // .then(response=>{
+  //   console.log(response)
+  // })
+
+
+  axios.post(process.env.APP_BACKENDURL2+'/api/email/sendemailverificationcode',data)
+  .then(responsedata=>{
+    console.log(responsedata)
   })
 
 
-  res.json({
-    response:true,
-    email:req.body.id
-  })
+  // res.json({
+  //   response:true,
+  //   data:data
+  // })
+  // console.log(data)
+
 }
 
 //***CHECK EMAIL VERIFICATION CODE (WEB)***//
