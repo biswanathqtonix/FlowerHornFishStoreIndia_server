@@ -2,6 +2,7 @@
 const {response}= require('express');
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
+const axios = require('axios')
 
 const User= require('../models/User');
 const LoginDetails= require('../models/LoginDetails');
@@ -442,19 +443,23 @@ const sendemailverificationcode = async (req,res) => {
 
   //password is his email verification code
 
-  email.send({
-        template: 'emailverification',
-        message: {
-          from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
-          to:user.email,
-        },
-        locals: {
-          name:user.name,
-          verifycode:user.email_verification_code,
-          // fname: 'John',
-          // lname: 'Snow',
-        }
-    }).then(() => console.log('email has been sent!'));
+  // email.send({
+  //       template: 'emailverification',
+  //       message: {
+  //         from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
+  //         to:user.email,
+  //       },
+  //       locals: {
+  //         name:user.name,
+  //         verifycode:user.email_verification_code,
+  //       }
+  //   }).then(() => console.log('email has been sent!'));
+
+
+  axios.get(process.env.APP_BACKENDURL2+'/email')
+  .then(response=>{
+    console.log(response)
+  })
 
 
   res.json({
