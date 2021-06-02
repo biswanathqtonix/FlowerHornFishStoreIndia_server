@@ -441,21 +441,6 @@ const sendemailverificationcode = async (req,res) => {
 
   const user = await User.findById(req.body.id);
 
-  //password is his email verification code
-
-  // email.send({
-  //       template: 'emailverification',
-  //       message: {
-  //         from:process.env.APP_NAME+' '+process.env.EMAIL_USER,
-  //         to:user.email,
-  //       },
-  //       locals: {
-  //         name:user.name,
-  //         verifycode:user.email_verification_code,
-  //       }
-  //   }).then(() => console.log('email has been sent!'));
-
-
   var data={
     name:user.name,
     email:user.email,
@@ -464,17 +449,17 @@ const sendemailverificationcode = async (req,res) => {
 
   axios.post(process.env.APP_BACKENDURL2+'/api/email/sendemailverificationcode',data)
   .then(responsedata=>{
-    res.json(response=>{
-      data:response
-    })
+    // res.json(response=>{
+    //   data:response
+    // })
+    // console.log(response);
+  })
+  res.json({
+    response:true,
   })
 
 
-  // res.json({
-  //   response:true,
-  //   data:data
-  // })
-  // console.log(data)
+
 
 }
 
