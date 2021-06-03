@@ -21,6 +21,7 @@
     "email-crawler": "^1.0.4",
     "email-templates": "^8.0.7",
     "express": "^4.17.1",
+    "generate-password": "^1.6.0",
     "get-site-urls": "^1.1.7",
     "http-errors": "^1.8.0",
     "imagekit": "^3.1.2",

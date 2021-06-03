@@ -2,6 +2,7 @@
 const {response}= require('express');
 var bcrypt = require('bcryptjs');
 var salt = bcrypt.genSaltSync(10);
+var generator = require('generate-password');
 const axios = require('axios')
 
 const User= require('../models/User');
@@ -211,6 +212,39 @@ const sociallogin = (req,res) => {
 //***USER FORGOT PASSWORD (WEB)***//
 const forgotpassword = (req,res) => {
 
+  var password = generator.generate({ length: 10, numbers: true });
+  var hash = bcrypt.hashSync(password, salt);
+
+  User.findOne({email:req.body.email})
+  .then(response=>{
+    if(response){
+
+      var data={
+        name:response.name,
+        email:response.email,
+        password:password
+      }
+
+      axios.post(process.env.APP_BACKENDURL2+'/api/email/sendtemporarypassword',data)
+      .then(responsedata=>{
+        console.log(responsedata)
+      })
+
+      const udata = {password:hash};
+      User.update({_id:response._id},udata,(err,doc)=>{
+        res.json({
+          response:true,
+        })
+      })
+
+
+    }else{
+      res.json({
+        response:false,
+        data:response,
+      })
+    }
+  })
 }
 
 
@@ -537,4 +571,4 @@ const deleteimage = (req,res) => {
 }
 
 
-module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,checkemailverificationcode,login,update,logindetails,sendemailverificationcode};
+module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,forgotpassword,checkemailverificationcode,login,update,logindetails,sendemailverificationcode};
