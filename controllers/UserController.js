@@ -83,7 +83,7 @@ const logindetails = (req,res) => {
 
 //***SOCIAL LOGIN Facebook (WEB)***
 const socialloginfacebook = (req,res) => {
-  User.findOne({email:req.body.ku})
+  User.findOne({email:req.body.email})
   .then(response=>{
     if(response){
       res.json({
@@ -101,8 +101,8 @@ const socialloginfacebook = (req,res) => {
       }).then(image => {
 
           var user = new User();
-          user.name = req.body.Ve;
-          user.email = req.body.ku;
+          user.name = req.body.name;
+          user.email = req.body.email;
           user.usertype = 'User';
           user.registervia = 'FaceBook';
           user.userstatus = 'Active';
