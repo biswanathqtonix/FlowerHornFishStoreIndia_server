@@ -138,6 +138,7 @@ const socialloginfacebook = (req,res) => {
 
     }
   })
+  console.log(req.body);
 }
 
 
@@ -163,8 +164,8 @@ const sociallogin = (req,res) => {
       }).then(image => {
 
           var user = new User();
-          user.name = req.body.name;
-          user.email = req.body.email;
+          user.name = req.body.Ve;
+          user.email = req.body.ku;
           user.usertype = 'User';
           user.registervia = 'Google';
           user.userstatus = 'Active';
@@ -200,6 +201,8 @@ const sociallogin = (req,res) => {
 
     }
   })
+  console.log(req.body);
+
 }
 
 
