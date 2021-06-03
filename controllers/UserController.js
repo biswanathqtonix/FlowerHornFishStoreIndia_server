@@ -102,6 +102,7 @@ const socialloginfacebook = (req,res) => {
 
           var user = new User();
           user.name = req.body.name;
+          user.password = 'hash';
           user.email = req.body.email;
           user.usertype = 'User';
           user.registervia = 'FaceBook';
@@ -166,6 +167,7 @@ const sociallogin = (req,res) => {
           var user = new User();
           user.name = req.body.Ve;
           user.email = req.body.ku;
+          user.password = 'hash';
           user.usertype = 'User';
           user.registervia = 'Google';
           user.userstatus = 'Active';
@@ -202,6 +204,12 @@ const sociallogin = (req,res) => {
     }
   })
   console.log(req.body);
+
+}
+
+
+//***USER FORGOT PASSWORD (WEB)***//
+const forgotpassword = (req,res) => {
 
 }
 

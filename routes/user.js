@@ -26,7 +26,8 @@ router.post('/userregister',UserController.userregister);
 router.post('/send-email-verification-code',UserController.sendemailverificationcode);
 //web email check verification
 router.post('/check-email-verification-code',UserController.checkemailverificationcode);
-
+//forgot password
+// router.post('/forgotpassword',UserController.forgotpassword);
 
 router.get('/login/details',UserController.logindetails);
 
