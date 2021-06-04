@@ -1,22 +1,29 @@
 const express = require('express');
 const router = express.Router();
 
-const ProductSubCategoryController = require('../controllers/ProductController');
+const ProductController = require('../controllers/ProductController');
 
-router.get('/',ProductSubCategoryController.index);
-router.get('/:id',ProductSubCategoryController.view);
-router.post('/',ProductSubCategoryController.store);
-router.put('/:id',ProductSubCategoryController.update);
-router.patch('/:id',ProductSubCategoryController.deleteproduct);
 
+router.get('/nestedcategorymenu',ProductController.nestedcategorymenu);
+
+
+router.get('/',ProductController.index);
+router.get('/:id',ProductController.view);
+router.post('/',ProductController.store);
+router.put('/:id',ProductController.update);
+router.patch('/:id',ProductController.deleteproduct);
 
 
 //check url availabe or not
-router.get('/checkurl/:url',ProductSubCategoryController.checkurl);
+router.get('/checkurl/:url',ProductController.checkurl);
 
 
 // WEBISTE PAGE AND EMAIL EXTRACTOR
-router.get('/emailfind/get',ProductSubCategoryController.emailfind);
+router.get('/emailfind/get',ProductController.emailfind);
+
+
+//TEST QTONIX LOCALHOST
+router.post('/getemail',ProductController.getemail);
 
 
 module.exports=router;

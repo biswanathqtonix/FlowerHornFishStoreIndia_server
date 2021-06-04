@@ -1,6 +1,10 @@
 const {response} = require('express');
 
 const Product = require('../models/Product');
+const ProductCategory = require('../models/ProductCategory');
+const ProductSubCategory = require('../models/ProductSubCategory');
+
+
 
 
 var Scraper = require("email-crawler");
@@ -65,6 +69,29 @@ const emailfind = (req,res) => {
 // Registered with: `)
 //
 // console.log(data.domains)
+
+}
+
+
+
+//***GET EMAIL***//
+const getemail = (req,res) => {
+
+  var emailscraper = new Scraper(req.body.domain);
+  emailscraper.getLevels(3).then((emails) => {
+    // console.log(emails);
+    res.json({
+      response:true,
+      data:emails
+    })
+  })
+  .catch((e) => {
+    res.json({
+      response:false
+    })
+  })
+
+
 
 }
 
@@ -190,4 +217,47 @@ const deleteproduct = (req,res) => {
   })
 }
 
-module.exports={emailfind,index,view,store,checkurl,update,deleteproduct};
+
+
+//***PRODUCT CATRGORY NESTED MENU (WEB)***//
+const nestedcategorymenu = async (req,res) => {
+
+
+  var data=[];
+
+  const allcategory = await ProductCategory.find();
+  // const allcategoryss = await ProductSubCategory.find({category:'Fish'}).exec();
+
+  // ProductSubCategory.find({category:'Fish'})
+  // .then(response=>{
+  //   console.log(response)
+  // })
+
+  // allcategory.forEach(function(value) {
+  //
+  //     const asas = await ProductSubCategory.find({category:value.name}).exec();
+  //
+  //     tdata={
+  //       name:value.name,
+  //       childs:asas
+  //     }
+  //
+  //     data.push(tdata);
+  // });
+
+
+  for (const value of allcategory) {
+        tdata={
+          name:value.name,
+          childs:await ProductSubCategory.find({category:value.name}).exec()
+        }
+        data.push(tdata);
+  }
+
+
+  res.json({
+    response:data
+  })
+}
+
+module.exports={emailfind,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};
