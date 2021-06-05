@@ -225,38 +225,20 @@ const nestedcategorymenu = async (req,res) => {
 
   var data=[];
 
-  const allcategory = await ProductCategory.find();
-  // const allcategoryss = await ProductSubCategory.find({category:'Fish'}).exec();
-
-  // ProductSubCategory.find({category:'Fish'})
-  // .then(response=>{
-  //   console.log(response)
-  // })
-
-  // allcategory.forEach(function(value) {
-  //
-  //     const asas = await ProductSubCategory.find({category:value.name}).exec();
-  //
-  //     tdata={
-  //       name:value.name,
-  //       childs:asas
-  //     }
-  //
-  //     data.push(tdata);
-  // });
-
+  const allcategory = await ProductCategory.find({display:'Show'});
 
   for (const value of allcategory) {
         tdata={
           name:value.name,
-          childs:await ProductSubCategory.find({category:value.name}).exec()
+          childs:await ProductSubCategory.find({category:value.name,display:'Show'}).exec()
         }
         data.push(tdata);
   }
 
 
   res.json({
-    response:data
+    response:true,
+    data:data
   })
 }
 
