@@ -255,7 +255,7 @@ const allproducts = (req,res) => {
   })
 }
 
-//***ALL PRODUCTS (WEB)***//
+//***ALL PRODUCTS CATEGORY (WEB)***//
 const allproductscategory = (req,res) => {
   Product.find({status:'Active',category:req.params.category}).sort({_id:-1})
   .then(data=>{
@@ -266,6 +266,18 @@ const allproductscategory = (req,res) => {
   })
 }
 
+//***ALL PRODUCTS CATEGORY SUBCATEGORY (WEB)***//
+const allproductscategorysubcategory = (req,res) => {
+  Product.find({status:'Active',category:req.params.category,subcategory:req.params.subcategory}).sort({_id:-1})
+  .then(data=>{
+    res.json({
+      response:true,
+      data:data
+    })
+  })
+}
 
 
-module.exports={emailfind,allproducts,allproductscategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};
+
+
+module.exports={emailfind,allproducts,allproductscategory,allproductscategorysubcategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};

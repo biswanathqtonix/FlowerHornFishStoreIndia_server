@@ -9,6 +9,8 @@ router.get('/nestedcategorymenu',ProductController.nestedcategorymenu);
 //web all active product
 router.get('/allproducts',ProductController.allproducts);
 router.get('/allproducts/:category',ProductController.allproductscategory);
+router.get('/allproducts/:category/:subcategory',ProductController.allproductscategorysubcategory);
+
 
 
 
