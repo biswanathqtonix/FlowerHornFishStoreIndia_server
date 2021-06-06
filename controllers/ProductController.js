@@ -242,4 +242,30 @@ const nestedcategorymenu = async (req,res) => {
   })
 }
 
-module.exports={emailfind,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};
+
+
+//***ALL PRODUCTS (WEB)***//
+const allproducts = (req,res) => {
+  Product.find({status:'Active'}).sort({_id:-1})
+  .then(data=>{
+    res.json({
+      response:true,
+      data:data
+    })
+  })
+}
+
+//***ALL PRODUCTS (WEB)***//
+const allproductscategory = (req,res) => {
+  Product.find({status:'Active',category:req.params.category}).sort({_id:-1})
+  .then(data=>{
+    res.json({
+      response:true,
+      data:data
+    })
+  })
+}
+
+
+
+module.exports={emailfind,allproducts,allproductscategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};
