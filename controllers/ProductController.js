@@ -278,6 +278,18 @@ const allproductscategorysubcategory = (req,res) => {
 }
 
 
+//***VIEW PRODUCT BY URL (WEB)***//
+const viewbyurl = (req,res) => {
+  Product.findOne({url:req.params.url})
+  .then(response=>{
+    res.json({
+      response:true,
+      data:response
+    })
+  })
+
+}
 
 
-module.exports={emailfind,allproducts,allproductscategory,allproductscategorysubcategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};
+
+module.exports={emailfind,viewbyurl,allproducts,allproductscategory,allproductscategorysubcategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};

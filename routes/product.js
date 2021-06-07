@@ -11,7 +11,8 @@ router.get('/allproducts',ProductController.allproducts);
 router.get('/allproducts/:category',ProductController.allproductscategory);
 router.get('/allproducts/:category/:subcategory',ProductController.allproductscategorysubcategory);
 
-
+//web view products by url
+router.get('/view/:url',ProductController.viewbyurl);
 
 
 
