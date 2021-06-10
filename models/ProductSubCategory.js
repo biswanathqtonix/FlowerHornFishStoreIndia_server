@@ -8,6 +8,18 @@ const ProductSubCategorySchema = new Schema({
   name:{
     type:String
   },
+  url:{
+    type:String
+  },
+  title:{
+    type:String
+  },
+  desc:{
+    type:String
+  },
+  image:{
+    type:String
+  },
   display:{
     type:String
   }
