@@ -20,7 +20,13 @@ stock:{
 category:{
   type:String
 },
+categoryurl:{
+  type:String
+},
 subcategory:{
+  type:String
+},
+subcategoryurl:{
   type:String
 },
 minorder:{

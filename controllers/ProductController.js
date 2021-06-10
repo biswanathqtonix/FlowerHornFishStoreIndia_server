@@ -152,9 +152,9 @@ const checkurl = (req,res) => {
 }
 
 //***STORE***
-const store = (req,res) => {
+const store =  async (req,res) => {
 
-  //CHECK URL IS AVAILABE OR NOT
+  // CHECK URL IS AVAILABE OR NOT
   Product.findOne({url:req.body.url},(err,doc)=>{
     if(!err){
       if(doc!==null){
@@ -166,6 +166,39 @@ const store = (req,res) => {
         //INSERT DATA
         Product.create(req.body,(err,data)=>{
           if(!err){
+
+            if(req.body.category!==undefined){
+              ProductCategory.findOne({name:req.body.category},(err,gcategoryurl)=>{
+
+                if(!err){
+                  let updateDataC = {
+                    categoryurl:gcategoryurl.url
+                  }
+                  Product.findByIdAndUpdate(data._id,{$set:updateDataC})
+                  .then(response=>{
+                    // console.log(response)
+                  })
+                }else{
+                }
+              })
+            }
+
+            if(req.body.subcategory!==undefined){
+              ProductSubCategory.findOne({name:req.body.subcategory},(err,gsubcategoryurl)=>{
+
+                if(!err){
+                  let updateDataSC = {
+                    subcategoryurl:gsubcategoryurl.url
+                  }
+                  Product.findByIdAndUpdate(data._id,{$set:updateDataSC})
+                  .then(response=>{
+                    // console.log(response)
+                  })
+                }else{
+                }
+              })
+            }
+
             res.json({
               response:true
             })
@@ -188,8 +221,43 @@ const store = (req,res) => {
 
 //***UPDATE***
 const update = (req,res) => {
-  Product.update({_id:req.params.id},req.body,(err,doc)=>{
+  Product.update({_id:req.params.id},req.body,(err,data)=>{
     if(!err){
+
+
+      if(req.body.category!==undefined){
+        ProductCategory.findOne({name:req.body.category},(err,gcategoryurl)=>{
+
+          if(!err){
+            let updateDataC = {
+              categoryurl:gcategoryurl.url
+            }
+            Product.findByIdAndUpdate(req.params.id,{$set:updateDataC})
+            .then(response=>{
+              // console.log(response)
+            })
+          }else{
+          }
+        })
+      }
+
+      if(req.body.subcategory!==undefined){
+        ProductSubCategory.findOne({name:req.body.subcategory},(err,gsubcategoryurl)=>{
+
+          if(!err){
+            let updateDataSC = {
+              subcategoryurl:gsubcategoryurl.url
+            }
+            Product.findByIdAndUpdate(req.params.id,{$set:updateDataSC})
+            .then(response=>{
+              // console.log(response)
+            })
+          }else{
+          }
+        })
+      }
+
+
       res.json({
         response:true
       })
@@ -230,6 +298,7 @@ const nestedcategorymenu = async (req,res) => {
   for (const value of allcategory) {
         tdata={
           name:value.name,
+          url:value.url,
           childs:await ProductSubCategory.find({category:value.name,display:'Show'}).exec()
         }
         data.push(tdata);
@@ -257,7 +326,7 @@ const allproducts = (req,res) => {
 
 //***ALL PRODUCTS CATEGORY (WEB)***//
 const allproductscategory = (req,res) => {
-  Product.find({status:'Active',category:req.params.category}).sort({_id:-1})
+  Product.find({status:'Active',categoryurl:req.params.category}).sort({_id:-1})
   .then(data=>{
     res.json({
       response:true,
@@ -268,7 +337,7 @@ const allproductscategory = (req,res) => {
 
 //***ALL PRODUCTS CATEGORY SUBCATEGORY (WEB)***//
 const allproductscategorysubcategory = (req,res) => {
-  Product.find({status:'Active',category:req.params.category,subcategory:req.params.subcategory}).sort({_id:-1})
+  Product.find({status:'Active',categoryurl:req.params.category,subcategoryurl:req.params.subcategory}).sort({_id:-1})
   .then(data=>{
     res.json({
       response:true,
