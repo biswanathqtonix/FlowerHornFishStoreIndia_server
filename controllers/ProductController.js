@@ -325,25 +325,54 @@ const allproducts = (req,res) => {
 }
 
 //***ALL PRODUCTS CATEGORY (WEB)***//
-const allproductscategory = (req,res) => {
-  Product.find({status:'Active',categoryurl:req.params.category}).sort({_id:-1})
-  .then(data=>{
-    res.json({
-      response:true,
-      data:data
-    })
+const allproductscategory = async (req,res) => {
+
+  var nesteddata=[];
+  const allcategoryss = await ProductCategory.find({display:'Show'});
+  for (const value of allcategoryss) {
+        tdata={
+          name:value.name,
+          url:value.url,
+          childs:await ProductSubCategory.find({category:value.name,display:'Show'}).exec()
+        }
+        nesteddata.push(tdata);
+  }
+
+  const allcategory = await Product.find({status:'Active',categoryurl:req.params.category}).sort({_id:-1})
+  const categorydetails = await ProductCategory.findOne({url:req.params.category})
+
+  res.json({
+    response:true,
+    data:allcategory,
+    nestedmenu:nesteddata,
+    categorydetails:categorydetails
   })
 }
 
 //***ALL PRODUCTS CATEGORY SUBCATEGORY (WEB)***//
-const allproductscategorysubcategory = (req,res) => {
-  Product.find({status:'Active',categoryurl:req.params.category,subcategoryurl:req.params.subcategory}).sort({_id:-1})
-  .then(data=>{
-    res.json({
-      response:true,
-      data:data
-    })
+const allproductscategorysubcategory = async (req,res) => {
+
+  var nesteddata=[];
+  const allcategoryss = await ProductCategory.find({display:'Show'});
+  for (const value of allcategoryss) {
+        tdata={
+          name:value.name,
+          url:value.url,
+          childs:await ProductSubCategory.find({category:value.name,display:'Show'}).exec()
+        }
+        nesteddata.push(tdata);
+  }
+
+  const allcategory = await Product.find({status:'Active',categoryurl:req.params.category,subcategoryurl:req.params.subcategory}).sort({_id:-1})
+  const subcategorydetails = await ProductSubCategory.findOne({url:req.params.subcategory})
+
+  res.json({
+    response:true,
+    data:allcategory,
+    nestedmenu:nesteddata,
+    subcategorydetails:subcategorydetails
   })
+
 }
 
 
