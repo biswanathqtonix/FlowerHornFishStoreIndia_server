@@ -19,6 +19,8 @@ const ProductCategory = require('./routes/productcategory');
 const ProductImage = require('./routes/productimage');
 const ProductSubCategory = require('./routes/productsubcategory');
 const Product = require('./routes/product');
+const Cart = require('./routes/cart');
+
 
 
 mongoose.connect(process.env.MONGODB, {useNewUrlParser: true, useUnifiedTopology:true});
@@ -89,3 +91,4 @@ app.use('/api/productcategory',ProductCategory);
 app.use('/api/productsubcategory',ProductSubCategory);
 app.use('/api/productimage',ProductImage);
 app.use('/api/product',Product);
+app.use('/api/cart',Cart);
