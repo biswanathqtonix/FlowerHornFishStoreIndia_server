@@ -95,7 +95,7 @@ const socialloginfacebook = (req,res) => {
     }else{
 
       imagekit.upload({
-        file : 'https://ik.imagekit.io/aquariumstore/myimages/unnamed_9sVgPsJTf.png',
+        file : 'https://ik.imagekit.io/aquariumstore/myimages/user-dummy_4ViSO5Xk4.jpg',
         fileName : "userimage.jpg",
         useUniqueFileName:true,
         folder:'userprofileimage'
@@ -265,7 +265,7 @@ const userregister = (req,res) => {
 
 
       imagekit.upload({
-        file : 'https://ik.imagekit.io/aquariumstore/myimages/unnamed_9sVgPsJTf.png',
+        file : 'https://ik.imagekit.io/aquariumstore/myimages/user-dummy_4ViSO5Xk4.jpg',
         fileName : "userimage.jpg",
         useUniqueFileName:true,
         folder:'userprofileimage'
@@ -561,6 +561,181 @@ const checkemailverificationcode = async (req,res) => {
 }
 
 
+
+
+//***UPDATE USER DETAILS***//
+const updateuserdetails = (req,res) => {
+  User.update({_id:req.params.id},req.body,(err,doc)=>{
+    if(!err){
+
+      User.findById(req.params.id)
+      .then(response=>{
+        res.json({
+          response:true,
+          data:response
+        })
+      })
+
+
+    }else{
+      res.json({
+        response:false
+      })
+    }
+  })
+}
+
+
+const updateuserpassword = (req,res) => {
+
+  User.findById(req.params.id,(err,doc)=>{
+    if(!err){
+      var match = bcrypt.compareSync(req.body.oldpassword, doc.password);
+       if (match){
+
+         var hash = bcrypt.hashSync(req.body.newpassword, salt);
+
+         const udata = {password:hash};
+
+         User.update({_id:req.params.id},udata,(err,doc)=>{
+           res.json({
+             response:true,
+           })
+         })
+
+       }else{
+         res.json({
+           response:false,
+           message:'wrong password'
+         })
+       }
+
+    }else{
+      res.json({
+        response:false,
+        message:'user id not found'
+      })
+    }
+  })
+
+}
+
+const updateuserimage = async (req,res) => {
+
+
+    imagekit.deleteFile(req.body.image_id).then(response => {
+      console.log('removed_old_image')
+    }).catch(error => {
+        console.log(error);
+    });
+
+
+
+    const encoded = req.file.buffer.toString('base64');
+
+    imagekit.upload({
+          file : encoded,
+          fileName : "userimage.jpg",
+          useUniqueFileName:true,
+          folder:'userprofileimage'
+    }).then(image => {
+      console.log('new_image_uploaded')
+
+          const udata = {
+              image: image.url,
+              image_name:  image.name,
+              image_id:  image.fileId,
+              image_path:  image.filePath,
+              imagesmall: image.url+'?tr=w-50,h-50',
+              imagemedium: image.url+'?tr=w-250,h-250,q-40',
+            };
+
+            //update data
+            User.update({_id:req.params.id},udata)
+            .then(resupdate=>{
+
+
+              User.findById(req.params.id)
+              .then(responseuser=>{
+                res.json({
+                  response:true,
+                  data:responseuser
+                })
+              })
+
+            })
+
+
+
+
+
+
+
+    }).catch(error => {
+        res.json({
+          response:false,
+          message:'image_create_error',
+          response:error,
+        })
+    });
+
+
+        //find user
+        // User.findById(req.params.id)
+        // .then(responsed=>{
+        //
+        //   const encoded = req.file.buffer.toString('base64');
+        //
+        //
+        //   //delete old image
+        //   imagekit.deleteFile(responsed.image_id).then(response=>{
+        //
+        //       //upload image
+        //
+        //
+        //       imagekit.upload({
+        //         file : encoded,
+        //         fileName : "userimage.jpg",
+        //         useUniqueFileName:true,
+        //         folder:'userprofileimage'
+        //       }).then(image => {
+        //
+        //       const udata = {
+        //         password:hash,
+        //         image: image.url,
+        //         image_name:  image.name,
+        //         image_id:  image.fileId,
+        //         image_path:  image.filePath,
+        //         imagesmall: image.url+'?tr=w-50,h-50',
+        //         imagemedium: image.url+'?tr=w-250,h-250,q-40',
+        //       };
+        //
+        //       //update data
+        //       User.update({_id:req.params.id},udata,(err,doc)=>{
+        //         User.findById(req.params.id)
+        //         .then(response=>{
+        //           res.json({
+        //             response:true,
+        //             data:response
+        //           })
+        //         })
+        //       })
+        //
+        //
+        //       }).catch(error => {
+        //         res.json({
+        //           response:false,
+        //           message:'image_create_error',
+        //           response:error,
+        //         })
+        //       });
+        //
+        //
+        //   })
+        // })
+}
+
+
 //***DELETE IMAGE***
 const deleteimage = (req,res) => {
   imagekit.deleteFile(req.params.imageid).then(response=>{
@@ -571,4 +746,4 @@ const deleteimage = (req,res) => {
 }
 
 
-module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,forgotpassword,checkemailverificationcode,login,update,logindetails,sendemailverificationcode};
+module.exports={index,store,view,deleteimage,userregister,deleteuser,sociallogin,socialloginfacebook,forgotpassword,checkemailverificationcode,login,update,logindetails,sendemailverificationcode,updateuserdetails,updateuserpassword,updateuserimage};

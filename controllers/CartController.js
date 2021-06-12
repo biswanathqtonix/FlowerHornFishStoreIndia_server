@@ -17,4 +17,12 @@ const index = (req,res) => {
 }
 
 
-module.exports={index};
+const addtocart = (req,res) => {
+  res.json({
+    response:true,
+    data:req.body
+  })
+}
+
+
+module.exports={index,addtocart};

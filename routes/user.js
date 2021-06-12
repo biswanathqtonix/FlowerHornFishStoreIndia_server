@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const upload = multer({});
 
 const UserController = require('../controllers/UserController');
+
+
+const multer  = require('multer')
+const upload = multer({});
 
 router.get('/',UserController.index);
 router.get('/:id',UserController.view);
@@ -28,6 +30,17 @@ router.post('/send-email-verification-code',UserController.sendemailverification
 router.post('/check-email-verification-code',UserController.checkemailverificationcode);
 //forgot password
 router.post('/forgotpassword',UserController.forgotpassword);
+
+
+//web update user
+router.put('/updateuserdetails/:id',UserController.updateuserdetails);
+
+//web update new password
+router.put('/updateuserpassword/:id',UserController.updateuserpassword);
+
+//web update user image
+router.put('/updateuserimage/:id',upload.single('image'),UserController.updateuserimage);
+
 
 router.get('/login/details',UserController.logindetails);
 

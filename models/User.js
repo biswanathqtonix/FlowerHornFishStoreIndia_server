@@ -46,7 +46,7 @@ const userSchema=new Schema({
   pin:{
     type:String
   },
-  fulladdress:{
+  address:{
     type:String
   },
   imagesmall:{
