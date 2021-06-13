@@ -18,11 +18,46 @@ const index = (req,res) => {
 
 
 const addtocart = (req,res) => {
-  res.json({
-    response:true,
-    data:req.body
-  })
+
+    Cart.findOne({userid:req.body.userid,productid:req.body.productid})
+    .then(response=>{
+      if(response){
+        res.json({
+          response:false,
+          message:'already_exist',
+          data:response
+        })
+      }else{
+        Cart.create(req.body,(err,doc)=>{
+          if(!err){
+            res.json({
+              response:true,
+              data:doc
+            })
+          }else{
+            res.json({
+              response:false,
+              message:'failed_to_insert'
+            })
+          }
+        })
+      }
+    })
+
 }
 
 
-module.exports={index,addtocart};
+const showproductsunderuser = (req,res) => {
+
+  Cart.find({userid:req.params.userid})
+  .then(response=>{
+    res.json({
+      response:true,
+      data:response
+    })
+  })
+
+
+}
+
+module.exports={index,addtocart,showproductsunderuser};
