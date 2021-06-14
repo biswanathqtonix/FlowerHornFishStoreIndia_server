@@ -16,5 +16,7 @@ router.get('/showproductsunderuser/:userid',CartController.showproductsunderuser
 //web update cart quantity
 router.post('/updatecartquantity',CartController.updatecartquantity);
 
+//web delete cart item
+router.patch('/deleteitem/:id',CartController.deleteitem);
 
 module.exports=router;

@@ -73,4 +73,15 @@ const updatecartquantity = (req,res) => {
 
 }
 
-module.exports={index,addtocart,showproductsunderuser,updatecartquantity};
+
+
+const deleteitem = (req,res) => {
+  Cart.findByIdAndRemove(req.params.id)
+  .then(response=>{
+    res.json({
+      response:true
+    })
+  })
+}
+
+module.exports={index,addtocart,showproductsunderuser,updatecartquantity,deleteitem};
