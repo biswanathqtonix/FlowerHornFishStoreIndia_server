@@ -60,4 +60,17 @@ const showproductsunderuser = (req,res) => {
 
 }
 
-module.exports={index,addtocart,showproductsunderuser};
+
+const updatecartquantity = (req,res) => {
+
+  Cart.update({_id:req.body.id},req.body)
+  .then(response=>{
+    res.json({
+      response:true
+    })
+  })
+
+
+}
+
+module.exports={index,addtocart,showproductsunderuser,updatecartquantity};

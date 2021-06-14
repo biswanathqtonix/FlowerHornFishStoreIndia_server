@@ -12,4 +12,9 @@ router.post('/addtocart',CartController.addtocart);
 //web show items under userid
 router.get('/showproductsunderuser/:userid',CartController.showproductsunderuser);
 
+
+//web update cart quantity
+router.post('/updatecartquantity',CartController.updatecartquantity);
+
+
 module.exports=router;
