@@ -24,6 +24,9 @@ const CartSchema = new Schema({
   displayprice:{
     type:Number
   },
+  totalprice:{
+    type:Number
+  },
   image:{
     type:String
   },

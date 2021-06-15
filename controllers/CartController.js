@@ -1,5 +1,5 @@
 const {response}= require('express');
-
+var _ = require('lodash');
 const Cart= require('../models/Cart');
 
 
@@ -47,15 +47,26 @@ const addtocart = (req,res) => {
 }
 
 
-const showproductsunderuser = (req,res) => {
+const showproductsunderuser = async (req,res) => {
+
+  const totalarray = await Cart.find({userid:req.params.userid}).distinct("totalprice");
+
 
   Cart.find({userid:req.params.userid})
   .then(response=>{
     res.json({
       response:true,
-      data:response
+      data:response,
+      totalprice:_.sum(totalarray)
     })
+
+    // var total = 0;
+    // for(var i=0; i<response.length; i++){
+    //     total += parseInt(response[i].price, 10);
+    // }
+
   })
+
 
 
 }
