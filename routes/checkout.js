@@ -8,4 +8,7 @@ router.get('/',CheckoutController.index);
 //web store checkout
 router.post('/addcheckout',CheckoutController.addcheckout);
 
+//web view checkout
+router.get('/viewcheckout/:userid',CheckoutController.viewcheckout);
+
 module.exports=router;
