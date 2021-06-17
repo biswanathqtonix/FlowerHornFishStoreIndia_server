@@ -58,8 +58,8 @@ const addcheckout = async (req,res) => {
 
 }
 
-//***VIEW CHECKOUT (web)***//
 
+//***VIEW CHECKOUT (web)***//
 const viewcheckout = async (req,res) => {
 
   Checkout.findOne({userid:req.params.userid},(err,doc)=>{
@@ -78,4 +78,22 @@ const viewcheckout = async (req,res) => {
 }
 
 
-module.exports={index,addcheckout,viewcheckout};
+//***CHANGE STATUS (web)***//
+const changestatus = (req,res) => {
+  Checkout.update({_id:req.body.id},req.body,(err,doc)=>{
+    if(!err){
+      res.json({
+        response:true,
+        data:doc,
+        ss:req.body.id
+      })
+    }else{
+      res.json({
+        response:false
+      })
+    }
+  })
+
+}
+
+module.exports={index,addcheckout,viewcheckout,changestatus};

@@ -11,4 +11,8 @@ router.post('/addcheckout',CheckoutController.addcheckout);
 //web view checkout
 router.get('/viewcheckout/:userid',CheckoutController.viewcheckout);
 
+//web view changestatus
+router.post('/changestatus',CheckoutController.changestatus);
+
+
 module.exports=router;
