@@ -148,7 +148,7 @@ const socialloginfacebook = (req,res) => {
 
 //***SOCIAL LOGIN Google (WEB)***
 const sociallogin = (req,res) => {
-  User.findOne({email:req.body.ku})
+  User.findOne({email:req.body.It})
   .then(response=>{
     if(response){
       res.json({
@@ -159,7 +159,7 @@ const sociallogin = (req,res) => {
     }else{
 
       imagekit.upload({
-        file : req.body.ZJ,
+        file : req.body.gj,
         fileName : "userimage.jpg",
         useUniqueFileName:true,
         folder:'userprofileimage'
@@ -167,7 +167,7 @@ const sociallogin = (req,res) => {
 
           var user = new User();
           user.name = req.body.Ve;
-          user.email = req.body.ku;
+          user.email = req.body.It;
           user.password = 'hash';
           user.usertype = 'User';
           user.registervia = 'Google';
