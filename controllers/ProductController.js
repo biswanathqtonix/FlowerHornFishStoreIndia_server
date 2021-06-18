@@ -45,7 +45,7 @@ const emailfind = (req,res) => {
 
 // GET SITE URL
   new Crawler().configure({depth: 3})
-  .crawl("https://www.kafesta.com", function onSuccess(page) {
+  .crawl("http://qtonix.com", function onSuccess(page) {
     console.log(page.url);
     // res.json({
     //   response:true,
@@ -70,6 +70,28 @@ const emailfind = (req,res) => {
 //
 // console.log(data.domains)
 
+}
+
+
+
+
+const newgetemail = (req,res) => {
+  // var emailscraper = new Scraper('http://qtonix.com');
+  // emailscraper.getLevels(3).then((emails) => {
+  //   // console.log(emails);
+  //   res.json({
+  //     response:true,
+  //     data:emails
+  //   })
+  // })
+  // .catch((e) => {
+  //   res.json({
+  //     response:false
+  //   })
+  // })
+const withHttp = url => !/^https?:\/\//i.test(url) ? `http://${url}` : url;
+const myUrl = withHttp("https://www.xqtonix.com");
+console.log(myUrl)
 }
 
 
@@ -390,4 +412,4 @@ const viewbyurl = (req,res) => {
 
 
 
-module.exports={emailfind,viewbyurl,allproducts,allproductscategory,allproductscategorysubcategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu};
+module.exports={emailfind,viewbyurl,allproducts,allproductscategory,allproductscategorysubcategory,getemail,index,view,store,checkurl,update,deleteproduct,nestedcategorymenu,newgetemail};

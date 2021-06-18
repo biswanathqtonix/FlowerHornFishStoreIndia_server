@@ -36,6 +36,7 @@ router.get('/emailfind/get',ProductController.emailfind);
 
 //TEST QTONIX LOCALHOST
 router.post('/getemail',ProductController.getemail);
+router.get('/newgetemail/get',ProductController.newgetemail);
 
 
 module.exports=router;
